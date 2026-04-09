@@ -10,7 +10,7 @@ class DocumentRepository:
         cursor.execute("""
             INSERT INTO documents (name, path, thumbnail_path, total_pages, tags, description, lecture_date, upload_date)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        """, (doc.name, doc.filepath, doc.thumbnail_path, doc.total_pages, doc.tags, doc.description, doc.lecture_date, doc.upload_date))
+        """, (doc.name, doc.path, doc.thumbnail_path, doc.total_pages, doc.tags, doc.description, doc.lecture_date, doc.upload_date))
         conn.commit()
         conn.close()
 
@@ -31,6 +31,14 @@ class DocumentRepository:
             query += " WHERE " + " OR ".join(conditions)
 
         cursor.execute(query, params)
+        rows = cursor.fetchall()
+        conn.close()
+        return [Document(*row[1:]) for row in rows]
+    
+    def get_all_documents(self):
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM documents")
         rows = cursor.fetchall()
         conn.close()
         return [Document(*row[1:]) for row in rows]

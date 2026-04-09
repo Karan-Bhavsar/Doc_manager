@@ -34,9 +34,17 @@ def init_db():
             document_id INTEGER,
             page_number INTEGER,
             
-            timestamp TEXT,
+            timestamp TEXT
             
         )
+    ''')
+
+    cursor.execute('''
+            CREATE TABLE IF NOT EXISTS app_visits (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                event_type TEXT,
+                timestamp TEXT
+            )
     ''')
     conn.commit()
     print("Database initialized successfully.")

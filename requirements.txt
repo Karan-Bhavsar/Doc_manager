@@ -1,2 +1,5 @@
 pymupdf
 streamlit
+PyMupdf
+python-dotenv
+pillow

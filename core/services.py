@@ -34,7 +34,7 @@ class DocumentService:
 
         doc = Document(
             name=os.path.basename(filepath),
-            filepath=filepath,
+            path=filepath,
             thumbnail_path=thumbnail_path,
             tags=tags,
             description=description,
@@ -47,3 +47,6 @@ class DocumentService:
 
     def search_documents(self, tag=None, date=None):
         return self.repo.search_documents(tag, date)
+    
+    def get_all_documents(self):
+        return self.repo.get_all_documents()
